@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="icon" href="../static/house-prices-scaled.jpg" type="image/x-icon">
+    <title>Banglore House Price Prediction Model </title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: rgb(98, 116, 218);
+        }
+        .bg{
+            background-image: url("../static/house-prices-scaled.jpg");
+            height: 80%;
+            margin: 0; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover; 
+        }
+
+        .bottom-left{
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            margin-bottom: 70px;
+        }
+        
+        .hed{
+            font-size: 1.3cm;
+            color: rgb(252, 237, 248);
+            font-weight: 700;
+        }
+
+        .divcolor{
+            border-radius: 10px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin-top: 50px;
+            margin-left: 250px;
+            margin-right: 250px;
+        }
+
+        input[type=number], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 5px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 5px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+        width: 100%;
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+        background-color: #45a049;
+        }
+
+        .bold{
+            font-weight: 900;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="bottom-left">
+            <h1 class="hed"> Banglore House Price Predection Model </h1>
+        </div>
+    </div>
+    <div  class="divcolor">
+        <div>
+            <center>
+                <h2 class="bold"> {{ pred_text }} </h2>
+            </center>
+        </div>
+        <div>
+            <h4 class="bold"> Please Enter following details for your Dream House and get Estimated Price </h2>
+        </div>
+        <br>
+        <form method="post" action="{{ url_for('predict') }}">
+            <!-- <div>
+                <label for="location" class="bold"> Location : </label>
+                <input type="text" name="location" required>
+            </div> -->
+
+            <div>
+                <label for="location" class="bold"> Location :</label>
+                <select name="location">
+                    {% for i in loc %}
+                        <option value="{{i}}"> {{i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="avail" class="bold"> Availability : </label>
+                <select for="avail" name="availability">
+                    <option value="available" checked> Available </option>
+                    <option value="non"> Available in Future </option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="area_type" class="bold"> Area Type : </label>
+                <select for="area_type" name="area_type">
+                    <option value="Super Built-up"> Super Built-Up Area </option>
+                    <option value="Built-up"> Built-Up Area </option>
+                    <option value="Plot"> Plot Area </option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="sqft" class="bold"> Total Sqft : </label>
+                <input type="number" name="sqft" min="300" max="300000"required> 
+            </div>
+            <br>
+            <div>
+                <label for="bhk" class="bold"> BHK : </label>
+                <input type="number" name="bhk" min="1" max="20" required> 
+            </div>
+            <br>
+            <div>
+                <label for="balcony" class="bold"> Balcony : </label>
+                <input type="number" name="balcony" min="0" max="7" required> 
+            </div>
+            <br>
+            <div>
+                <label for="bath" class="bold"> Bathroom : </label>
+                <input type="number" name="bath" min="1" max="25" required> 
+            </div>
+            
+            <br><br>
+            <button class="w3-btn w3-block w3-red w3-centre-align bold"> Predict Price </button>
+        </form>
+        
+    </div>
+</body>
+</html>

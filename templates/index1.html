@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<title> Data Form </title>
+	<style type="text/css">
+		.divcolor
+		{
+			
+  			border-radius: 5px;
+  			background-color: #f2f2f2;
+  			padding: 20px;
+		}
+
+		input[type=text], select 
+		{
+  			display: inline-block;
+  			border: 1px solid #ccc;
+  			border-radius: 4px;
+  			box-sizing: border-box;
+		}
+
+		.column 
+		{
+  			float: left;
+  			width: 50%;
+  			padding: 10px;
+  			height: 425px;
+		}
+		.row:after 
+		{
+  			content: "";
+  			display: table;
+  			clear: both;
+		}	
+		.scroll 
+		{
+            margin:4px, 4px;
+            padding:4px; 
+			
+            width: 500px;
+            height: 110px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align:justify;
+        }
+		
+	</style>
+</head>
+<body >
+	<div class="w3-panel w3-topbar w3-bottombar w3-border-red w3-pale-red">
+		<div class="w3-container w3-center"> <h1 color=> Banglore House Price Prediction Model </h1> </div>
+	</div>
+	<div class="row">
+	<div class="column">
+	<form method="POST" class="divcolor" action="{{ url_for('predict')}}">
+		<div>
+			<label for="location"> Location : </label>
+			<input type="text" name="location" required>
+		</div>
+		<br>
+		<div>
+			<label for="avail"> Availability : </label>
+			<select for="avail" name="availability">
+				<option value="available" checked> Available </option>
+				<option value="non"> Available in Future </option>
+			</select>
+		</div>
+		<br>
+		<div>
+			<label for="area_type"> Area Type : </label>
+			<select for="area_type" name="area_type">
+				<option value="Super Built-up"> Super Built-Up Area </option>
+				<option value="Built-up"> Built-Up Area </option>
+				<option value="Plot"> Plot Area </option>
+			</select>
+		</div>
+		<br>
+		<div>
+			<label for="sqft"> Total Sqft : </label>
+			<input type="number" name="sqft" min="300" max="300000"required> 
+		</div>
+		<br>
+		<div>
+			<label for="bhk"> BHK : </label>
+			<input type="number" name="bhk" min="1" max="20" required> 
+		</div>
+		<br>
+		<div>
+			<label for="balcony"> Balcony : </label>
+			<input type="number" name="balcony" min="0" max="7" required> 
+		</div>
+		<br>
+		<div>
+			<label for="bath"> Bathroom : </label>
+			<input type="number" name="bath" min="1" max="25" required> 
+		</div>
+		<br>
+		<div>
+			<button class="w3-button w3-black w3-round-xxlarge" style="margin-left:230px;"> Predict Price </button>
+		</div>
+	</form>
+	</div>
+	<div class="divcolor column scroll" style="height: 420px;width: 745px;margin-top: 10px;">
+		<h2> Locations :</h2>
+		<ul>
+			{% for i in xyz %}
+        		<li> {{ i }} </li>
+			{% endfor %}
+		</ul>
+	</div>
+	</div>
+	<div>
+		<center>
+			<h2> {{ pred_text }} </h2>
+		</center>
+	</div>
+</body>
+</html>
